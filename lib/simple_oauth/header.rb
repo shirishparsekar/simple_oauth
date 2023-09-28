@@ -101,7 +101,7 @@ module SimpleOAuth
     end
 
     def secret
-      options.values_at(:consumer_secret, :token_secret).collect { |v| self.class.escape(v) }.join("&")
+      options.values_at(:consumer_secret).collect { |v| self.class.escape(v) }.join("&")
     end
     alias_method :plaintext_signature, :secret
 
@@ -114,7 +114,7 @@ module SimpleOAuth
     end
 
     def signature_params
-      attributes.to_a + params.to_a + url_params
+      attributes.to_a + options.to_a + url_params
     end
 
     def url_params
